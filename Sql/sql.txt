@@ -1,0 +1,25 @@
+CREATE TABLE Products
+(
+	Id INT IDENTITY PRIMARY KEY,
+	Name NVARCHAR(30) NOT NULL,
+);
+
+CREATE TABLE Categories
+(
+	Id INT IDENTITY PRIMARY KEY,
+	Name NVARCHAR(30) NOT NULL,	
+);
+
+CREATE TABLE CategoriesAndProducts
+(
+	ProductId NOT NULL INT REFERENCES Products(Id) ON DELETE CASCADE,
+	CategoryId NOT NULL INT REFERENCES Categories(Id) ON DELETE CASCADE,
+);
+
+
+SELECT Products.Name, Categories.Name
+FROM Products, Categories, CategoriesAndProducts
+WHERE (CategoriesAndProducts.ProductId = Product.Id AND CategoriesAndProducts.CategoryId  = Categories.Id) 
+OR Product.Id IS NOT IN (SELECT ProductId FROM CategoriesAndProducts) 
+
+--Делал не в sql managment studio из-за недавнего переезда, поэтому могут быть ошибки, надеюсь это не слишко смутит вас
