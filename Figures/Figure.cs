@@ -5,7 +5,7 @@
         
         protected Figure() 
         {
-            
+            //let's push it
         }
         public abstract double Square();
     }
